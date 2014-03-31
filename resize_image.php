@@ -1,6 +1,7 @@
 <?php
 
 function resize_image($immagine="", $new_width="", $new_height="", $crop=false, $posizione="", $rewrite=false){
+  //minitest
 	/**
 	* Ridimensiona l'immagine a seconda delle dimensioni e del modo specificato
 	*
