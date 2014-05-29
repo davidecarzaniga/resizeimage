@@ -110,6 +110,22 @@ function resize_image($immagine="", $new_width="", $new_height="", $crop=false, 
 				}
 				
 				$debug ? print "crop a $pos_x x $pos_y<hr/>" : "";
+        
+        $orientation = $thumb->getImageOrientation(); 
+
+        switch($orientation) { 
+          case imagick::ORIENTATION_BOTTOMRIGHT: 
+              $thumb->rotateimage("#000", 180); // rotate 180 degrees 
+          break; 
+  
+          case imagick::ORIENTATION_RIGHTTOP: 
+              $thumb->rotateimage("#000", 90); // rotate 90 degrees CW 
+          break; 
+  
+          case imagick::ORIENTATION_LEFTBOTTOM: 
+              $thumb->rotateimage("#000", -90); // rotate 90 degrees CCW 
+          break; 
+        } 
 				
 				$thumb->cropImage($new_width, $new_height, abs(round($pos_x)), abs(round($pos_y)) );
 				$thumb->writeImage($thumb_name);
@@ -134,6 +150,23 @@ function resize_image($immagine="", $new_width="", $new_height="", $crop=false, 
 				
 				$thumb = new Imagick();
 				$thumb->readImage($immagine_path);
+        
+        $orientation = $thumb->getImageOrientation(); 
+
+        switch($orientation) { 
+          case imagick::ORIENTATION_BOTTOMRIGHT: 
+              $thumb->rotateimage("#000", 180); // rotate 180 degrees 
+          break; 
+  
+          case imagick::ORIENTATION_RIGHTTOP: 
+              $thumb->rotateimage("#000", 90); // rotate 90 degrees CW 
+          break; 
+  
+          case imagick::ORIENTATION_LEFTBOTTOM: 
+              $thumb->rotateimage("#000", -90); // rotate 90 degrees CCW 
+          break; 
+        }
+          
 				$thumb->resizeImage($w_to_resize,$h_to_resize,Imagick::FILTER_LANCZOS,1,1);
 				if( $posizione == "" ){
 					//resize normale
